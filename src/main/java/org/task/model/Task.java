@@ -1,6 +1,5 @@
-package org.example.model;
+package org.task.model;
 
-import java.time.Instant;
 import java.time.LocalDateTime;
 
 public class Task {

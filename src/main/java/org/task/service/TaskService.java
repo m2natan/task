@@ -1,7 +1,7 @@
-package org.example.service;
+package org.task.service;
 
-import org.example.model.Status;
-import org.example.model.Task;
+import org.task.model.Status;
+import org.task.model.Task;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
@@ -36,7 +36,7 @@ public class TaskService {
     }
 
     public void ListTasks() throws IOException {
-        jsonHandlerService.printTaskPrettyJson();
+        jsonHandlerService.getTaskList();
     }
 
     public void ListTasksDone() throws IOException {

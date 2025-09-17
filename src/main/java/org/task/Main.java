@@ -1,6 +1,6 @@
-package org.example;
+package org.task;
 
-import org.example.service.TaskService;
+import org.task.service.TaskService;
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
@@ -42,9 +42,22 @@ public class Main {
                     taskService.UpdateStatusToDone(Long.valueOf(key1));
                 }
                 case "list" ->
-//                key1 = args[1];
-                    //TODO if args[1] doesn't exist
+                {
+                    if (args.length == 2){
+                        key1 = args[1];
+                        if (key1.equals("todo")){
+                            taskService.ListTasksTodo();
+                        }
+                        else if(key1.equals("in-progress")){
+                            taskService.ListTasksInProgress();
+                        }
+                        else{
+                            taskService.ListTasksDone();
+                        }
+                    }else{
                         taskService.ListTasks();
+                    }
+                }
                 default -> System.out.println("default");
             }
         }catch (IndexOutOfBoundsException indexOutOfBoundsException){

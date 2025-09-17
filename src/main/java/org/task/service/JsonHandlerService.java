@@ -1,10 +1,11 @@
-package org.example.service;
+package org.task.service;
+
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-import org.example.model.Status;
-import org.example.model.Task;
+import org.task.model.Status;
+import org.task.model.Task;
 
 import java.io.File;
 import java.io.IOException;
@@ -12,12 +13,12 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-public class JsonHandlerService{
+public class JsonHandlerService {
     private static final String FILE_PATH = "person.json";
     private final ObjectMapper objectMapper;
     File file;
 
-    public JsonHandlerService(){
+    public JsonHandlerService() {
         objectMapper = new ObjectMapper();
         objectMapper.registerModule(new JavaTimeModule());
         objectMapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
@@ -40,14 +41,13 @@ public class JsonHandlerService{
         }
 
         // Read the tasks from the file
-        return objectMapper.readValue(file, new TypeReference<List<Task>>() {});
+        return objectMapper.readValue(file, new TypeReference<List<Task>>() {
+        });
     }
 
-    public void printTaskPrettyJson() throws IOException {
-        List<Task> tasks = readTasks();
+    public void printTaskPrettyJson(List<Task> tasks) throws IOException {
         System.out.println(objectMapper.writeValueAsString(tasks));
     }
-
 
 
     public void saveTasks(List<Task> tasks) throws IOException {
@@ -62,39 +62,39 @@ public class JsonHandlerService{
 
     public void getTaskTodo() throws IOException {
         List<Task> tasks = readTasks();
-        System.out.println(tasks.stream()
+        printTaskPrettyJson(tasks.stream()
                 .filter(task -> task.getStatus() == Status.TODO)
-                .findAny()
-                .orElse(null));
+                .toList());
     }
 
     public void getTaskInProgress() throws IOException {
         List<Task> tasks = readTasks();
-
-        System.out.println(tasks.stream()
+        printTaskPrettyJson(tasks.stream()
                 .filter(task -> task.getStatus() == Status.IN_PROGRESS)
-                .findAny()
-                .orElse(null));
+                .toList());
     }
 
     public void getTaskDone() throws IOException {
         List<Task> tasks = readTasks();
-        System.out.println(tasks.stream()
+        printTaskPrettyJson(tasks.stream()
                 .filter(task -> task.getStatus() == Status.DONE)
-                .findAny()
-                .orElse(null));
+                .toList());
+    }
+
+    public void getTaskList() throws IOException{
+        printTaskPrettyJson(readTasks().stream().toList());
     }
 
 
     public void deleteTasks(Long id) throws IOException {
         List<Task> tasks = readTasks();
         boolean removed = tasks.removeIf(task -> task.getId() == id);
-        if(removed){
+        if (removed) {
             saveTasks(tasks);
         }
     }
 
-    public void updateTaskDescription(Long id, String description) throws IOException{
+    public void updateTaskDescription(Long id, String description) throws IOException {
         List<Task> tasks = readTasks();
         Task updatedTask = tasks.stream()
                 .filter(task -> task.getId() == id)
@@ -106,7 +106,7 @@ public class JsonHandlerService{
         saveTasks(tasks);
     }
 
-    public void updateTaskInProgress(Long id) throws IOException{
+    public void updateTaskInProgress(Long id) throws IOException {
         List<Task> tasks = readTasks();
         Task updatedTask = tasks.stream()
                 .filter(task -> task.getId() == id)
@@ -118,7 +118,7 @@ public class JsonHandlerService{
         saveTasks(tasks);
     }
 
-    public void updateTaskDone(Long id) throws IOException{
+    public void updateTaskDone(Long id) throws IOException {
         List<Task> tasks = readTasks();
         Task updatedTask = tasks.stream()
                 .filter(task -> task.getId() == id)

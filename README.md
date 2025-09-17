@@ -9,14 +9,13 @@ mvn clean package
 ```
 
 ```bash
-# Adding a new task
+Adding a new task
 java -jar target/tracker-1.0-SNAPSHOT.jar  add "Buy groceries"
 ```
+## Output: Task added successfully (ID: 1)
 
-# Output: Task added successfully (ID: 1)
 
-# Updating and deleting tasks
-
+Updating and deleting tasks
 ```bash
 java -jar target/tracker-1.0-SNAPSHOT.jar  update 1 "Buy groceries and cook dinner"
 ```
@@ -25,8 +24,7 @@ java -jar target/tracker-1.0-SNAPSHOT.jar  update 1 "Buy groceries and cook dinn
 java -jar target/tracker-1.0-SNAPSHOT.jar  delete 1
 ```
 
-# Marking a task as in progress or done
-
+Marking a task as in progress or done
 ```bash
 java -jar target/tracker-1.0-SNAPSHOT.jar  mark-in-progress 1
 ```
@@ -35,14 +33,12 @@ java -jar target/tracker-1.0-SNAPSHOT.jar  mark-in-progress 1
 java -jar target/tracker-1.0-SNAPSHOT.jar  mark-done 1
 ```
 
-# Listing all tasks
-
+Listing all tasks
 ```bash
 java -jar target/tracker-1.0-SNAPSHOT.jar  list
 ```
 
-# Listing tasks by status
-
+Listing tasks by status
 ```bash
 java -jar target/tracker-1.0-SNAPSHOT.jar  list done
 ```

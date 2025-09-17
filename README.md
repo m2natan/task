@@ -8,11 +8,11 @@ Build a CLI app to track your tasks and manage your to-do list.
 mvn clean package
 ```
 
-```bash
 Adding a new task
+```bash
 java -jar target/tracker-1.0-SNAPSHOT.jar  add "Buy groceries"
 ```
-## Output: Task added successfully (ID: 1)
+### Output: Task added successfully (ID: 1)
 
 
 Updating and deleting tasks
